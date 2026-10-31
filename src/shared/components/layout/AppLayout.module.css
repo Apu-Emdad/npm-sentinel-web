@@ -1,0 +1,22 @@
+.header {
+  background: var(--mantine-color-body);
+}
+
+.link {
+  padding: 8px 12px;
+  font-size: var(--mantine-font-size-sm);
+  color: var(--mantine-color-dimmed);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.link:hover {
+  color: var(--mantine-color-text);
+}
+
+/* NavLink sets aria-current on the link of the current page */
+.link[aria-current='page'] {
+  color: var(--app-accent-text);
+  border-bottom-color: var(--mantine-color-amber-5);
+  font-weight: 500;
+}
