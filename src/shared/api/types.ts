@@ -14,6 +14,7 @@ export interface AuthUser {
   userName: string;
   email: string;
   role: RoleName;
+  emailVerified: boolean;
 }
 
 /** What login, register and refresh return in `data`. */

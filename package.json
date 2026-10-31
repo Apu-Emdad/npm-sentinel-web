@@ -19,6 +19,7 @@
   },
   "packageManager": "yarn@4.18.1+sha512.b2e1e7524f654f2749d32b4ebcb4622473cb5bcbc485df2007e12a154e50162a4d795526768bc5f5b8f81717bfd79deb2472813d86fb5ae2eb551fa9c872b08f",
   "dependencies": {
+    "@hookform/resolvers": "^6.0.0",
     "@mantine/core": "^9.7.3",
     "@mantine/hooks": "^9.7.3",
     "@mantine/notifications": "^9.7.3",
@@ -28,8 +29,10 @@
     "axios": "^1.20.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "react-hook-form": "^7.91.0",
     "react-redux": "^9.3.0",
-    "react-router": "^8.5.0"
+    "react-router": "^8.5.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",

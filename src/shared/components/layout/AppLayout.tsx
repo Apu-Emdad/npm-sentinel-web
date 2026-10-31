@@ -1,15 +1,23 @@
 import { AppShell, Burger, Container, Group, Menu } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Link, NavLink, Outlet } from 'react-router';
+import { useAppSelector } from '@/app/store/hooks';
 import { NAV_ITEMS } from '@/shared/constants/navItems';
 import { ROUTES } from '@/shared/constants/routes';
 import { ColorSchemeToggle } from '../ui/ColorSchemeToggle';
 import { Logo } from '../ui/Logo';
 import classes from './AppLayout.module.css';
+import { UserMenu } from './UserMenu';
 
 /** Top bar only, no sidebar. On phones the links move into a menu. */
 export const AppLayout = () => {
   const [menuOpened, { toggle, close }] = useDisclosure();
+  const user = useAppSelector((state) => state.auth.user);
+  const items = NAV_ITEMS.filter(
+    (item) =>
+      (!item.loggedIn || user) &&
+      (!item.roles || (user && item.roles.includes(user.role))),
+  );
 
   return (
     <AppShell header={{ height: 64 }} padding="lg">
@@ -24,7 +32,7 @@ export const AppLayout = () => {
           </Link>
 
           <Group component="nav" aria-label="Main" gap={4} visibleFrom="sm">
-            {NAV_ITEMS.map((item) => (
+            {items.map((item) => (
               <NavLink
                 key={item.url}
                 to={item.url}
@@ -38,6 +46,7 @@ export const AppLayout = () => {
 
           <Group gap="xs" wrap="nowrap">
             <ColorSchemeToggle />
+            <UserMenu />
             <Menu
               opened={menuOpened}
               onChange={toggle}
@@ -53,7 +62,7 @@ export const AppLayout = () => {
                 />
               </Menu.Target>
               <Menu.Dropdown>
-                {NAV_ITEMS.map((item) => (
+                {items.map((item) => (
                   <Menu.Item
                     key={item.url}
                     component={Link}

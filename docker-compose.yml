@@ -11,6 +11,6 @@ services:
     image: npm-sentinel-web
     container_name: npm-sentinel-web
     restart: unless-stopped
-    # 5173 matches WEB_ORIGIN in the API's .env, which CORS and the refresh cookie need
+    # 7001 matches WEB_ORIGIN in the API's .env, which CORS and the refresh cookie need
     ports:
-      - '5173:4173'
+      - '7001:4173'
