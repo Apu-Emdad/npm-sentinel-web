@@ -1,7 +1,7 @@
 import { Group, Text } from '@mantine/core';
 import { IconShieldCheck } from '@tabler/icons-react';
 
-export const APP_NAME = 'sentinel';
+export const APP_NAME = 'npm-sentinel';
 
 export const Logo = () => {
   return (
