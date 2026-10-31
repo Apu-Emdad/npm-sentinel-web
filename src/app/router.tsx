@@ -1,4 +1,4 @@
-import { createBrowserRouter, type RouteObject } from 'react-router';
+import { createBrowserRouter } from 'react-router';
 import { AnalyzePage } from '@/features/scans/pages/AnalyzePage';
 import { ScansPage } from '@/features/scans/pages/ScansPage';
 import { UsersPage } from '@/features/users/pages/UsersPage';
@@ -6,8 +6,7 @@ import { AppLayout } from '@/shared/components/layout/AppLayout';
 import { ROUTES } from '@/shared/constants/routes';
 import { NotFoundPage } from './NotFoundPage';
 
-/** Exported so tests can render the same routes in a memory router. */
-export const routes: RouteObject[] = [
+export const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [
@@ -17,6 +16,4 @@ export const routes: RouteObject[] = [
     ],
   },
   { path: '*', element: <NotFoundPage /> },
-];
-
-export const router = createBrowserRouter(routes);
+]);
