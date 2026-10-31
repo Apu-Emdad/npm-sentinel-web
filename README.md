@@ -20,7 +20,7 @@ cp .env.example .env
 yarn dev
 ```
 
-The app runs at `http://localhost:5173`. That address must match `WEB_ORIGIN` in the API's `.env`.
+The app runs at `http://localhost:7001`. That address must match `WEB_ORIGIN` in the API's `.env`.
 
 ## Run with Docker
 
@@ -29,7 +29,7 @@ cp .env.example .env
 docker compose up --build
 ```
 
-The app is built with `VITE_API_URL` from `.env` and served at `http://localhost:5173`. After changing `VITE_API_URL`, run `docker compose up --build` again.
+The app is built with `VITE_API_URL` from `.env` and served at `http://localhost:7001`. After changing `VITE_API_URL`, run `docker compose up --build` again.
 
 ## Environment
 
