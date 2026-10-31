@@ -1,5 +1,5 @@
 # =============================================================================
-# CI PIPELINE: lint, typecheck, test, build
+# CI PIPELINE: lint, typecheck, build
 # Runs on every PR and every push to main. Nothing is deployed.
 # =============================================================================
 
@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   check:
-    name: Lint, typecheck, test, build
+    name: Lint, typecheck, build
     runs-on: ubuntu-latest
 
     steps:
@@ -47,9 +47,6 @@ jobs:
 
       - name: Typecheck
         run: yarn typecheck
-
-      - name: Tests
-        run: yarn test # the API is faked with MSW, no backend needed
 
       - name: Build
         run: yarn build

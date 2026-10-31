@@ -1,4 +1,5 @@
 import { MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import type { ReactNode } from 'react';
 import { cssVariablesResolver, theme } from '@/theme/theme';
 
@@ -10,6 +11,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       cssVariablesResolver={cssVariablesResolver}
       defaultColorScheme="dark"
     >
+      <Notifications position="top-right" />
       {children}
     </MantineProvider>
   );

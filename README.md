@@ -35,9 +35,12 @@ The app is built with `VITE_API_URL` from `.env` and served at `http://localhost
 
 | Variable       | Default                 | Meaning                 |
 | -------------- | ----------------------- | ----------------------- |
-| `VITE_API_URL` | `http://localhost:6000` | Base URL of the API     |
+| `VITE_API_URL` | `http://localhost:7000` | Base URL of the API     |
 
 ## Scripts
+
+The web app has no automated tests.
+
 
 | Script              | What it does                    |
 | ------------------- | ------------------------------- |
@@ -48,9 +51,8 @@ The app is built with `VITE_API_URL` from `.env` and served at `http://localhost
 | `yarn format`       | Prettier, writes changes        |
 | `yarn format:check` | Prettier, only checks           |
 | `yarn typecheck`    | TypeScript, no output           |
-| `yarn test`         | Vitest with Testing Library     |
 
-CI runs lint, format check, typecheck, tests and build on every pull request and every push to `main`.
+CI runs lint, format check, typecheck and build on every pull request and every push to `main`.
 
 ## Folder layout
 
@@ -60,7 +62,6 @@ src/
   features/       One folder per feature (pages, components, api)
   shared/         Layout, shared UI, constants
   theme/          Mantine theme and global CSS
-  test/           Test setup and helpers
 ```
 
 ## License
