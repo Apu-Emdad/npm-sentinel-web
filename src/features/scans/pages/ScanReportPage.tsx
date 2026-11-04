@@ -1,11 +1,10 @@
 import { Stack } from '@mantine/core';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { getErrorMessage } from '@/shared/api/interceptor';
 import { PageTop } from '@/shared/components/layout/PageTop';
 import { ErrorState } from '@/shared/components/ui/ErrorState';
 import { PageLoader } from '@/shared/components/ui/PageLoader';
-import { ROUTES } from '@/shared/constants/routes';
 import { notifyError } from '@/shared/utils/notify';
 import { scansApi } from '../api/scansApi';
 import { ScanResult } from '../components/ScanResult';
@@ -16,7 +15,6 @@ import type { Scan } from '../types';
 /** One scan's report. Polls until the scan is completed or failed. Works without logging in. */
 export const ScanReportPage = () => {
   const { uid = '' } = useParams();
-  const navigate = useNavigate();
 
   const scanQuery = useQuery({
     queryKey: ['scan', uid],
@@ -25,10 +23,15 @@ export const ScanReportPage = () => {
       isDone(query.state.data) ? false : POLL_INTERVAL_MS,
   });
 
-  // scanning the same package and version again as a new scan
+  /**
+   * Scanning the same package version again
+   *
+   * The API reruns it on the same scan, so the page reloads it to show the
+   * queued state and starts polling again.
+   */
   const rescan = useMutation({
     mutationFn: scansApi.createScan,
-    onSuccess: (scan) => navigate(`${ROUTES.scans}/${scan.uid}`),
+    onSuccess: () => scanQuery.refetch(),
     onError: notifyError,
   });
   const handleRescan = () => {
