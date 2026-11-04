@@ -10,6 +10,7 @@ import { RegisterPage } from '@/features/auth/pages/RegisterPage';
 import { ResetPasswordPage } from '@/features/auth/pages/ResetPasswordPage';
 import { VerifyEmailPage } from '@/features/auth/pages/VerifyEmailPage';
 import { AnalyzePage } from '@/features/scans/pages/AnalyzePage';
+import { ScanReportPage } from '@/features/scans/pages/ScanReportPage';
 import { ScansPage } from '@/features/scans/pages/ScansPage';
 import { UsersPage } from '@/features/users/pages/UsersPage';
 import { AppLayout } from '@/shared/components/layout/AppLayout';
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
     children: [
       // Scanning works without an account.
       { path: ROUTES.analyze, element: <AnalyzePage /> },
+      { path: `${ROUTES.scans}/:uid`, element: <ScanReportPage /> },
       {
         element: <RequireAuth />,
         children: [
