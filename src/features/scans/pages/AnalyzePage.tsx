@@ -1,39 +1,30 @@
 import {
-  Alert,
   Badge,
-  Button,
-  Group,
   Paper,
+  SegmentedControl,
   SimpleGrid,
   Stack,
   Text,
   Title,
 } from '@mantine/core';
-import { IconArrowRight } from '@tabler/icons-react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { FormProvider, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router';
-import { getErrorMessage } from '@/shared/api/interceptor';
-import { FormTextInput } from '@/shared/components/ui/FormFields';
-import { ROUTES } from '@/shared/constants/routes';
-import { scansApi } from '../api/scansApi';
+import { useState } from 'react';
+import { useLocation } from 'react-router';
+import { BulkScanForm } from '../components/BulkScanForm';
+import { SingleScanForm } from '../components/SingleScanForm';
 import { CHECKS } from '../constants';
-import { scanSchema, type ScanValues } from '../schemas/scan.schema';
-import type { CreateScanBody } from '../types';
 
-/** Home page: submit a package and go to its report. Works without logging in. */
+type ScanType = 'single' | 'bulk';
+
+/**
+ * Home page: scan one package or a whole package.json. Works without logging in.
+ *
+ * Other pages can open the package.json tab by navigating here with `{ state: { scanType: 'bulk' } }`.
+ */
 export const AnalyzePage = () => {
-  const navigate = useNavigate();
-
-  const createScan = useMutation({
-    mutationFn: scansApi.createScan,
-    onSuccess: (scan) => navigate(`${ROUTES.scans}/${scan.uid}`),
-  });
-  const form = useForm<ScanValues>({
-    resolver: zodResolver(scanSchema),
-    defaultValues: { target: '' },
-  });
+  const location = useLocation();
+  const [scanType, setScanType] = useState<ScanType>(
+    location.state?.scanType ?? 'single',
+  );
 
   return (
     <Stack gap={56} maw={1040} mx="auto" py={56}>
@@ -49,47 +40,18 @@ export const AnalyzePage = () => {
           it a risk score with the reasons.
         </Text>
 
-        <FormProvider {...form}>
-          <form
-            onSubmit={form.handleSubmit((values) =>
-              createScan.mutate(toScanBody(values.target)),
-            )}
-            noValidate
-            style={{ width: '100%', marginTop: 16 }}
-          >
-            <Stack gap="sm">
-              {createScan.isError && (
-                <Alert color="red" variant="light" ta="left">
-                  {getErrorMessage(createScan.error)}
-                </Alert>
-              )}
-              <Group gap="xs" align="flex-start">
-                <FormTextInput
-                  name="target"
-                  aria-label="Package name"
-                  placeholder="lodash or lodash@4.17.21"
-                  size="lg"
-                  leftSection={
-                    <Text fw={700} c="var(--app-accent-text)">
-                      $
-                    </Text>
-                  }
-                  autoComplete="off"
-                  spellCheck={false}
-                  style={{ flex: '1 1 320px', textAlign: 'left' }}
-                />
-                <Button
-                  type="submit"
-                  size="lg"
-                  loading={createScan.isPending}
-                  rightSection={<IconArrowRight size={18} />}
-                >
-                  Scan
-                </Button>
-              </Group>
-            </Stack>
-          </form>
-        </FormProvider>
+        <SegmentedControl
+          aria-label="Scan type"
+          mt="md"
+          color="amber"
+          value={scanType}
+          onChange={(value) => setScanType(value as ScanType)}
+          data={[
+            { label: 'One package', value: 'single' },
+            { label: 'package.json', value: 'bulk' },
+          ]}
+        />
+        {scanType === 'single' ? <SingleScanForm /> : <BulkScanForm />}
 
         <Text size="xs" c="dimmed">
           Scans run in the background. You can leave the report page and come
@@ -114,19 +76,4 @@ export const AnalyzePage = () => {
       </Stack>
     </Stack>
   );
-};
-
-/**
- * Splits `name@version` into the scan request
- *
- * The `@` at the start of a scoped name (`@scope/name`) is not a version.
- */
-const toScanBody = (target: string): CreateScanBody => {
-  const versionAt = target.lastIndexOf('@');
-  if (versionAt <= 0) return { packageName: target };
-
-  return {
-    packageName: target.slice(0, versionAt),
-    version: target.slice(versionAt + 1),
-  };
 };

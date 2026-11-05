@@ -10,6 +10,7 @@ import { RegisterPage } from '@/features/auth/pages/RegisterPage';
 import { ResetPasswordPage } from '@/features/auth/pages/ResetPasswordPage';
 import { VerifyEmailPage } from '@/features/auth/pages/VerifyEmailPage';
 import { AnalyzePage } from '@/features/scans/pages/AnalyzePage';
+import { BulkScanReportPage } from '@/features/scans/pages/BulkScanReportPage';
 import { ScanReportPage } from '@/features/scans/pages/ScanReportPage';
 import { ScansPage } from '@/features/scans/pages/ScansPage';
 import { UsersPage } from '@/features/users/pages/UsersPage';
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
       // Scanning works without an account.
       { path: ROUTES.analyze, element: <AnalyzePage /> },
       { path: `${ROUTES.scans}/:uid`, element: <ScanReportPage /> },
+      { path: `${ROUTES.bulkScans}/:uid`, element: <BulkScanReportPage /> },
       {
         element: <RequireAuth />,
         children: [
