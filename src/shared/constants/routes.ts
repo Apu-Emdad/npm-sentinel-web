@@ -1,6 +1,7 @@
 export const ROUTES = {
   analyze: '/',
   scans: '/scans',
+  bulkScans: '/scans/bulk',
   users: '/users',
   login: '/login',
   register: '/register',
