@@ -4,6 +4,20 @@ The web dashboard for [npm-sentinel](https://github.com/Apu-Emdad/npm-sentinel-a
 
 Built with React, TypeScript, Vite and Mantine. The design is "Radar amber": dark slate with an amber accent, JetBrains Mono for all text, and both light and dark mode.
 
+## Screenshots
+
+Scan one package, or switch to the `package.json` tab to scan every dependency at once:
+
+![Analyze page](docs/screenshots/analyze.png)
+
+A scan report: the risk score, each finding with its evidence, and the result of every check:
+
+![Scan report](docs/screenshots/scan-report.png)
+
+A `package.json` scan: progress, risk counts, every package sorted by risk, and the dependencies that were skipped:
+
+![package.json scan results](docs/screenshots/bulk-scan.png)
+
 ## Requirements
 
 - Node 24 (`nvm use` reads `.nvmrc`)
