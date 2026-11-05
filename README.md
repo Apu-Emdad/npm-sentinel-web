@@ -6,17 +6,9 @@ Built with React, TypeScript, Vite and Mantine. The design is "Radar amber": dar
 
 ## Screenshots
 
-Scan one package, or switch to the `package.json` tab to scan every dependency at once:
+The Analyze page, a scan report, and the results of a `package.json` scan:
 
-![Analyze page](docs/screenshots/analyze.png)
-
-A scan report: the risk score, each finding with its evidence, and the result of every check:
-
-![Scan report](docs/screenshots/scan-report.png)
-
-A `package.json` scan: progress, risk counts, every package sorted by risk, and the dependencies that were skipped:
-
-![package.json scan results](docs/screenshots/bulk-scan.png)
+![Analyze page, scan report and package.json scan results](docs/screenshots/demo.gif)
 
 ## Requirements
 
