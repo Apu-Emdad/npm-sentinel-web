@@ -4,6 +4,12 @@ The web dashboard for [npm-sentinel](https://github.com/Apu-Emdad/npm-sentinel-a
 
 Built with React, TypeScript, Vite and Mantine. The design is "Radar amber": dark slate with an amber accent, JetBrains Mono for all text, and both light and dark mode.
 
+## Screenshots
+
+The Analyze page, a scan report, and the results of a `package.json` scan:
+
+![Analyze page, scan report and package.json scan results](docs/screenshots/demo.gif)
+
 ## Requirements
 
 - Node 24 (`nvm use` reads `.nvmrc`)
