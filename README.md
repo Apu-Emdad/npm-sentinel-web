@@ -39,9 +39,9 @@ The app is built with `VITE_API_URL` from `.env` and served at `http://localhost
 
 ## Environment
 
-| Variable       | Default                 | Meaning                 |
-| -------------- | ----------------------- | ----------------------- |
-| `VITE_API_URL` | `http://localhost:7000` | Base URL of the API     |
+| Variable       | Default                     | Meaning                                          |
+| -------------- | --------------------------- | ------------------------------------------------ |
+| `VITE_API_URL` | `http://localhost:7000/api` | Base URL of the API, including the `/api` prefix |
 
 ## Scripts
 
